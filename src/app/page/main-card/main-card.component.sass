@@ -1,0 +1,9 @@
+// @use sass:math
+
+@function subtract($num1, $num2)
+    $value: calc($num1 - $num2)
+    @return $value
+    
+
+.main-content
+    min-height: subtract(100vh, 5rem)
