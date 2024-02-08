@@ -1,18 +1,14 @@
-<main class="container-fluid d-flex flex-column align-items-center main-content">
-    
-    <nav >
-        <div class="nav nav-tabs vw-100 row" id="nav-tab" role="tablist">
+<div class="col-sm-10 col-md-8 col-xxl-6 mx-auto">
+    <nav>
+        <div class="nav nav-tabs row m-0" id="nav-tab" role="tablist">
             <ng-template ngFor let-tab [ngForOf]="tabs" let-i="index" [ngForTrackBy]="trackbyfn">
-                <button class="nav-link col" [ngClass]="{active: (tab.id === 1)}" [id]="'nav-'+tab.id+'-tab'" data-bs-toggle="tab" [attr.data-bs-target]="'#nav-'+tab.id+'-content'" type="button" role="tab" [attr.aria-controls]="'nav-'+tab.id+'-content'" [attr.aria-selected]="tab.id === 1">{{tab.item}}</button>
-            </ng-template>
+                <button class="nav-link col" [id]="tab.link" data-bs-toggle="tab" data-bs-target="#nav-tab-content" type="button" role="tab" aria-controls="nav-tab-content" [attr.aria-selected]="tab.id === 1" [routerLink]="tab.link" routerLinkActive="active text-c-primary">{{tab.name}}</button>
+            </ng-template>  
         </div>
-      </nav>
-      <div class="tab-content" id="nav-tabContent">
-        <ng-template ngFor let-tab [ngForOf]="tabs" let-i="index" [ngForTrackBy]="trackbyfn">
-            <div class="tab-pane fade" [ngClass]="{show: (tab.id === 1), active: (tab.id === 1)}" [id]="'nav-'+tab.id+'-content'" role="tabpanel" [attr.aria-labelledby]="'nav-'+tab.id+'-tab'">
-                <app-main-card-first-tab></app-main-card-first-tab>
-            </div>
-        </ng-template>
-      </div>
-
-</main>
+    </nav> 
+    <div class="tab-content border border-top-0 rounded-bottom bg-white" id="nav-tabContent">
+        <div class="tab-pane fade show active mb-4" id="nav-tab-content" role="tabpanel">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

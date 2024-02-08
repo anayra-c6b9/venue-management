@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControllerHandlerService } from 'src/app/services/controller/controller-handler.service';
 import { Subscription } from 'rxjs';
 import { RouterModule } from '@angular/router';
-import { MainCardFirstTabComponent } from '../main-card-first-tab/main-card-first-tab.component';
+import { CustomLinks } from 'src/app/interfaces';
 
 export interface TabItem {
   id: Number,
@@ -13,39 +13,22 @@ export interface TabItem {
 @Component({
   selector: 'app-main-card',
   standalone: true,
-  imports: [CommonModule, RouterModule, MainCardFirstTabComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './main-card.component.html',
   styleUrls: ['./main-card.component.sass'],
   providers: [ControllerHandlerService]
 })
 export class MainCardComponent implements OnInit {
-  controlHandlerSubscription: Subscription;
-  role = "";
+  // controlHandlerSubscription: Subscription;
 
-  tabs: Array<TabItem> = [
-    {
-      id: 1,
-      item: 'Upcoming Events',
-    }, {
-      id: 2,
-      item: 'List Venue'
-    }, {
-      id: 3,
-      item: 'Add Venue'
-    }
-  ]
+  @Input() tabs: Array<CustomLinks> = [] 
 
-  trackbyfn = (index: Number, item: TabItem): Number => {
+  trackbyfn = (index: Number, item: CustomLinks): Number => {
     return item.id
   }
 
-  constructor(private controlHandler: ControllerHandlerService) {
-    this.controlHandlerSubscription = this.controlHandler.role$.subscribe(res => {
-      this.role = res
-    })
-    
-    this.controlHandler.setRole("admin")
-  }
+  // constructor(private controlHandler: ControllerHandlerService) {
+  // }
 
   ngOnInit(): void {
     // console.log(this.role)

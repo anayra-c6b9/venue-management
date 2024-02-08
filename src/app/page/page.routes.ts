@@ -1,15 +1,31 @@
 import { Route } from "@angular/router";
-import { MainCardComponent } from "./main-card/main-card.component";
+import { MasterComponent } from "./master/master.component";
+import { AdminComponent } from "./admin/admin.component";
+import { FacultyComponent } from "./faculty/faculty.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
 const ROLE = "master"
 
 export const PAGE_ROUTES: Route[] = [
     {
-        path: `${ROLE}`,
-        component: MainCardComponent
+        path: "master",
+        component: MasterComponent,
+        loadChildren: () => import("./master/master.routes").then(m => m.MASTER_ROUTES)
+    },
+    {
+        path: "admin",
+        component: AdminComponent
+    },
+    {
+        path: "faculty",
+        component: FacultyComponent
     },
     {
         path: "",
-        redirectTo: `/${ROLE}`,
+        redirectTo: "master",
         pathMatch: "full"
+    },
+    {
+        path: "**",
+        component: NotFoundComponent
     }
 ]
