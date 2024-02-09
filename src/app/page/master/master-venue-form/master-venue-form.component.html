@@ -1,0 +1,85 @@
+<form class="row mt-2 px-4 gy-3" [formGroup]="addVenueFormGroup">
+    <div class="form-floating col-10">
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="hallName">
+        <label class="ms-2 text-c-primary" for="floatingInput">Hall Name</label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('hallName')?.errors && (addVenueFormGroup.get('hallName')?.touched || addVenueFormGroup.get('hallName')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('hallName')?.errors?.['required']">Please enter a Hall Name</span>
+            <span *ngIf="addVenueFormGroup.get('hallName')?.errors?.['minlength']">Please enter more than {{addVenueFormGroup.get('hallName')?.errors?.['minlength']?.['requiredLength']}} letters</span>
+        </div>
+      </div>
+    <div class="form-floating col-6">
+        <input type="number" class="form-control" id="floatingPassword" placeholder="Password" formControlName="noOfSeats">
+        <label class="ms-2 text-c-primary" for="floatingPassword">No. of Seats</label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('noOfSeats')?.errors && (addVenueFormGroup.get('noOfSeats')?.touched || addVenueFormGroup.get('noOfSeats')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('noOfSeats')?.errors?.['required']">Please enter an amount</span>
+            <span *ngIf="addVenueFormGroup.get('noOfSeats')?.errors?.['min']">Please enter more than {{ addVenueFormGroup.get('noOfSeats')?.errors?.['min']?.['min'] }}</span>
+        </div>
+      </div>
+      <div class="form-floating col-6">
+        <input type="number" class="form-control" id="floatingPassword" placeholder="Password" formControlName="noOfMics">
+        <label class="ms-2 text-c-primary" for="floatingPassword">No. of Mics</label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('noOfMics')?.errors && (addVenueFormGroup.get('noOfMics')?.touched || addVenueFormGroup.get('noOfMics')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('noOfMics')?.errors?.['required']">Please enter an amount</span>
+            <span *ngIf="addVenueFormGroup.get('noOfMics')?.errors?.['min']">Please enter more than {{ addVenueFormGroup.get('noOfMics')?.errors?.['min']?.['min'] }}</span>
+        </div>
+      </div>
+      <div class="form-floating col-6">
+        <input type="number" class="form-control" id="floatingPassword" placeholder="Password" formControlName="noOfCollarMics">
+        <label class="ms-2 text-wrap text-c-primary" for="floatingPassword">No. of Collar Mics</label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('noOfCollarMics')?.errors && (addVenueFormGroup.get('noOfCollarMics')?.touched || addVenueFormGroup.get('noOfCollarMics')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('noOfCollarMics')?.errors?.['required']">Please enter an amount</span>
+            <span *ngIf="addVenueFormGroup.get('noOfCollarMics')?.errors?.['min']">Please enter more than {{ addVenueFormGroup.get('noOfCollarMics')?.errors?.['min']?.['min'] }}</span>
+        </div>
+      </div>
+      <div class="form-floating col-6">
+        <input type="number" class="form-control" id="floatingPassword" placeholder="Password" formControlName="noOfStandMics">
+        <label class="ms-2 text-wrap text-c-primary" for="floatingPassword">No. of Stand Mics</label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('noOfStandMics')?.errors && (addVenueFormGroup.get('noOfStandMics')?.touched || addVenueFormGroup.get('noOfStandMics')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('noOfStandMics')?.errors?.['required']">Please enter an amount</span>
+            <span *ngIf="addVenueFormGroup.get('noOfStandMics')?.errors?.['min']">Please enter more than {{ addVenueFormGroup.get('noOfStandMics')?.errors?.['min']?.['min'] }}</span>
+        </div>
+      </div>
+      <div class="form-floating col-7">
+        <input type="number" class="form-control" id="floatingPassword" placeholder="Password" formControlName="noOfWhiteBoards">
+        <label class="ms-2 text-c-primary" for="floatingPassword">No. of White Board</label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('noOfWhiteBoards')?.errors && (addVenueFormGroup.get('noOfWhiteBoards')?.touched || addVenueFormGroup.get('noOfWhiteBoards')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('noOfWhiteBoards')?.errors?.['required']">Please enter an amount</span>
+            <span *ngIf="addVenueFormGroup.get('noOfWhiteBoards')?.errors?.['min']">Please enter more than {{ addVenueFormGroup.get('noOfWhiteBoards')?.errors?.['min']?.['min'] }}</span>
+        </div>
+      </div>
+
+      <div class="form-check col-8 ms-3">
+        <input class="form-check-input" type="checkbox" value="" id="acCheckDefault" formControlName="acAvailability">
+        <label class="form-check-label text-c-primary" for="acCheckDefault">
+          AC Availablity
+        </label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('acAvailability')?.errors && (addVenueFormGroup.get('acAvailability')?.touched || addVenueFormGroup.get('acAvailability')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('acAvailability')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+      </div>
+      <div class="form-check col-8 ms-3">
+        <input class="form-check-input" type="checkbox" value="" id="projectorCheckDefault" formControlName="projectorAvailability">
+        <label class="form-check-label text-c-primary" for="projectorCheckDefault">
+          Projector Availablity
+        </label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('acAvailability')?.errors && (addVenueFormGroup.get('acAvailability')?.touched || addVenueFormGroup.get('acAvailability')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('acAvailability')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+      </div>
+      <div class="form-floating col-6">
+        <input type="time" class="form-control" id="floatingPassword" placeholder="Opening Time" formControlName="openingTime">
+        <label class="ms-2 text-c-primary" for="floatingPassword">Opening Time</label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('openingTime')?.errors && (addVenueFormGroup.get('openingTime')?.touched || addVenueFormGroup.get('openingTime')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('openingTime')?.errors?.['required']">Please enter a time</span>
+        </div>
+      </div>
+      <div class="form-floating col-6">
+        <input type="time" class="form-control" id="floatingPassword" placeholder="Closing Time" formControlName="closingTime">
+        <label class="ms-2 text-c-primary" for="floatingPassword">Closing Time</label>
+        <div class="text-danger" *ngIf="addVenueFormGroup.get('closingTime')?.errors && (addVenueFormGroup.get('closingTime')?.touched || addVenueFormGroup.get('closingTime')?.dirty)">
+            <span *ngIf="addVenueFormGroup.get('closingTime')?.errors?.['required']">Please enter a time</span>
+        </div>
+      </div>
+      <app-master-venue-form-buttons [formIsValid]="addVenueFormGroup.valid" [type]="type"></app-master-venue-form-buttons>      
+</form>
+

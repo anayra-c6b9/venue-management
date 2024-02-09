@@ -1,0 +1,14 @@
+<ng-container [ngSwitch]="type">
+    <div *ngSwitchCase="'add'">
+        <button type="button" class="btn btn-success float-end" (click)="isValid()" [disabled]="!formIsValid">+ Add</button>
+    </div>
+    <div *ngSwitchCase="'view'">
+        <button type="button" class="btn btn-danger float-end ms-3" (click)="isValid()" >Delete</button>
+        <button type="button" class="btn btn-light border float-end" (click)="isValid()" >Edit</button>
+    </div>
+    <div *ngSwitchCase="'edit'">
+        <button type="button" class="btn btn-success float-end ms-2" (click)="isValid()" >Submit</button>
+        <button type="button" class="btn btn-light border float-end" (click)="isValid()" >Cancel</button>
+    </div>
+    <div *ngSwitchDefault></div>
+</ng-container>
