@@ -1,0 +1,127 @@
+<form [formGroup]="registerHallGroup" class="pt-4 px-4 row">
+    <div class="form-floating col">
+        <select class="form-select" id="hallName" aria-label="Floating label select example" formControlName="hallName" (change)="refreshHallRequirements()">
+            <option selected value="">-- --</option>
+            <option value="Marengo Hall">Marengo Hall</option>
+            <option value="AV Hall">AV Hall</option>
+            <option value="Nazareth Hall">Nazareth Hall</option>
+        </select>
+        <label class="ms-2 text-c-primary" for="hallName">Hall Name</label>
+        <div class="text-danger" *ngIf="registerHallGroup.get('hallName')?.errors && (registerFormGroup.get('hallName')?.touched || registerFormGroup.get('hallName')?.dirty)">
+            <span *ngIf="registerFormGroup.get('hallName')?.errors?.['required']">Please select a Hall</span>
+        </div>
+    </div>
+    <!-- <app-master-venue-form-buttons [mode]="mode" [formIsValid]="registerFormGroup.valid" (addFormEvent)="addEvent()"></app-master-venue-form-buttons> -->
+</form>
+<form [formGroup]="registerFormGroup" class="pt-3 px-4 row gy-3">
+    <div class="form-floating col-6">
+        <input type="number" class="form-control" id="noOfSeats" placeholder="No. of Seats" formControlName="noOfSeats">
+        <label for="noOfSeats" class="ms-2">No. of Seats</label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('noOfSeats')?.errors && (registerFormGroup.get('noOfSeats')?.touched || registerFormGroup.get('noOfSeats')?.dirty)">
+            <span *ngIf="registerFormGroup.get('noOfSeats')?.errors?.['required']">Please enter a number</span>
+            <span *ngIf="registerFormGroup.get('noOfSeats')?.errors?.['min']">Please enter {{registerFormGroup.get('noOfSeats')?.errors?.['min']?.['min']}} or any greater number</span>
+            <span *ngIf="registerFormGroup.get('noOfSeats')?.errors?.['max']">Maximum no. of seat is {{registerFormGroup.get('noOfSeats')?.errors?.['max']?.['max']}}</span>
+            <span *ngIf="registerFormGroup.get('noOfSeats')?.errors?.['isinteger']">Please enter an Integer</span>
+        </div>
+    </div>
+    <div class="form-floating col-6">
+        <input type="number" class="form-control" id="noOfMics" placeholder="No. of Mics" formControlName="noOfMics">
+        <label for="noOfMics" class="ms-2">No. of Mics</label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('noOfMics')?.errors && (registerFormGroup.get('noOfMics')?.touched || registerFormGroup.get('noOfMics')?.dirty)">
+            <span *ngIf="registerFormGroup.get('noOfMics')?.errors?.['required']">Please enter a number</span>
+            <span *ngIf="registerFormGroup.get('noOfMics')?.errors?.['min']">Please enter {{registerFormGroup.get('noOfMics')?.errors?.['min']?.['min']}} or any greater number</span>
+            <span *ngIf="registerFormGroup.get('noOfMics')?.errors?.['max']">Maximum no. of mic is {{registerFormGroup.get('noOfMics')?.errors?.['max']?.['max']}}</span>
+        </div>
+    </div>
+    <div class="form-floating col-6">
+        <input type="number" class="form-control" id="noOfStandMics" placeholder="No. of Stand Mics" formControlName="noOfStandMics">
+        <label for="noOfStandMics" class="ms-2">No. of Stand Mics</label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('noOfStandMics')?.errors && (registerFormGroup.get('noOfStandMics')?.touched || registerFormGroup.get('noOfStandMics')?.dirty)">
+            <span *ngIf="registerFormGroup.get('noOfStandMics')?.errors?.['required']">Please enter a number</span>
+            <span *ngIf="registerFormGroup.get('noOfStandMics')?.errors?.['min']">Please enter {{registerFormGroup.get('noOfStandMics')?.errors?.['min']?.['min']}} or any greater number</span>
+            <span *ngIf="registerFormGroup.get('noOfStandMics')?.errors?.['max']">Maximum no. of stand mic is {{registerFormGroup.get('noOfStandMics')?.errors?.['max']?.['max']}}</span>
+        </div>
+    </div>
+    <div class="form-floating col-6">
+        <input type="number" class="form-control" id="noOfCollarMics" placeholder="No. of Collar Mics" formControlName="noOfCollarMics">
+        <label for="noOfCollarMics" class="ms-2">No. of Collar Mics</label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('noOfCollarMics')?.errors && (registerFormGroup.get('noOfCollarMics')?.touched || registerFormGroup.get('noOfCollarMics')?.dirty)">
+            <span *ngIf="registerFormGroup.get('noOfCollarMics')?.errors?.['required']">Please enter a number</span>
+            <span *ngIf="registerFormGroup.get('noOfCollarMics')?.errors?.['min']">Please enter {{registerFormGroup.get('noOfCollarMics')?.errors?.['min']?.['min']}} or any greater number</span>
+            <span *ngIf="registerFormGroup.get('noOfCollarMics')?.errors?.['max']">Maximum no. of collar mic is {{registerFormGroup.get('noOfCollarMics')?.errors?.['max']?.['max']}}</span>
+        </div>
+    </div>
+    <div class="form-floating col-8">
+        <input type="number" class="form-control" id="noOfLeatherChair" placeholder="No. of Leather Chair" formControlName="noOfLeatherChair">
+        <label for="noOfLeatherChair" class="ms-2">No. of Leather Chair</label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('noOfLeatherChair')?.errors && (registerFormGroup.get('noOfLeatherChair')?.touched || registerFormGroup.get('noOfLeatherChair')?.dirty)">
+            <span *ngIf="registerFormGroup.get('noOfLeatherChair')?.errors?.['required']">Please enter a number</span>
+            <span *ngIf="registerFormGroup.get('noOfLeatherChair')?.errors?.['min']">Please enter {{registerFormGroup.get('noOfLeatherChair')?.errors?.['min']?.['min']}} or any greater number</span>
+            <span *ngIf="registerFormGroup.get('noOfLeatherChair')?.errors?.['max']">Maximum no. of leather chair is {{registerFormGroup.get('noOfLeatherChair')?.errors?.['max']?.['max']}}</span>
+        </div>
+    </div>
+    <div class="form-check col-12 ms-3">
+        <input class="form-check-input" type="checkbox" id="acRequirement" formControlName="acRequirement">
+        <label class="form-check-label text-c-primary" for="acRequirement">
+          AC Requirement
+        </label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('acRequirement')?.errors && (registerFormGroup.get('acRequirement')?.touched || registerFormGroup.get('acRequirement')?.dirty)">
+            <span *ngIf="registerFormGroup.get('acRequirement')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+    </div>
+    <div class="form-check col-12 ms-3">
+        <input class="form-check-input" type="checkbox" id="laptopRequirement" formControlName="laptopRequirement">
+        <label class="form-check-label text-c-primary" for="laptopRequirement">
+          Laptop Requirement
+        </label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('laptopRequirement')?.errors && (registerFormGroup.get('laptopRequirement')?.touched || registerFormGroup.get('laptopRequirement')?.dirty)">
+            <span *ngIf="registerFormGroup.get('laptopRequirement')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+    </div>
+    <div class="form-check col-12 ms-3">
+        <input class="form-check-input" type="checkbox" id="whiteBoardRequirement" formControlName="whiteBoardRequirement">
+        <label class="form-check-label text-c-primary" for="whiteBoardRequirement">
+          White Board Requirement
+        </label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('whiteBoardRequirement')?.errors && (registerFormGroup.get('whiteBoardRequirement')?.touched || registerFormGroup.get('whiteBoardRequirement')?.dirty)">
+            <span *ngIf="registerFormGroup.get('whiteBoardRequirement')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+    </div>
+    <div class="form-check col-12 ms-3">
+        <input class="form-check-input" type="checkbox" id="lampRequirement" formControlName="lampRequirement">
+        <label class="form-check-label text-c-primary" for="lampRequirement">
+          Lamp Requirement
+        </label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('lampRequirement')?.errors && (registerFormGroup.get('lampRequirement')?.touched || registerFormGroup.get('lampRequirement')?.dirty)">
+            <span *ngIf="registerFormGroup.get('lampRequirement')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+    </div>
+    <div class="form-check col-12 ms-3">
+        <input class="form-check-input" type="checkbox" value="" id="soundSystemRequirement" formControlName="soundSystemRequirement">
+        <label class="form-check-label text-c-primary" for="soundSystemRequirement">
+          Sound System Requirement
+        </label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('soundSystemRequirement')?.errors && (registerFormGroup.get('soundSystemRequirement')?.touched || registerFormGroup.get('soundSystemRequirement')?.dirty)">
+            <span *ngIf="registerFormGroup.get('soundSystemRequirement')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+    </div>
+    <div class="form-check col-12 ms-3">
+        <input class="form-check-input" type="checkbox" id="projectorRequirement" formControlName="projectorRequirement">
+        <label class="form-check-label text-c-primary" for="projectorRequirement">
+            Projector Requirement
+        </label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('projectorRequirement')?.errors && (registerFormGroup.get('projectorRequirement')?.touched || registerFormGroup.get('projectorRequirement')?.dirty)">
+            <span *ngIf="registerFormGroup.get('projectorRequirement')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+    </div>
+    <div class="form-check col-12 ms-3">
+        <input class="form-check-input" type="checkbox" id="projectorSliderRequirement" formControlName="projectorSliderRequirement">
+        <label class="form-check-label text-c-primary" for="projectorSliderRequirement">
+            Projector Slider Requirement
+        </label>
+        <div class="text-danger" *ngIf="registerFormGroup.get('projectorSliderRequirement')?.errors && (registerFormGroup.get('projectorSliderRequirement')?.touched || registerFormGroup.get('projectorSliderRequirement')?.dirty)">
+            <span *ngIf="registerFormGroup.get('projectorSliderRequirement')?.errors?.['required']">Please enter a Choice</span>
+        </div>
+    </div>
+    <app-faculty-form-button [mode]="mode" [formIsValid]="registerFormGroup.valid && registerHallGroup.valid"></app-faculty-form-button>
+</form>

@@ -1,0 +1,33 @@
+<form [formGroup]="requestFormGroup" class="pt-4 px-4 d-flex flex-column gap-3">
+        <div class="form-floating">
+            <textarea class="form-control" id="eventTitle" placeholder="Event Name" formControlName="eventTitle"></textarea>
+            <label class="ms-2 text-c-primary" for="eventTitle">Event Name</label>
+            <div class="text-danger" *ngIf="requestFormGroup.get('eventTitle')?.errors && (requestFormGroup.get('eventTitle')?.touched || requestFormGroup.get('eventTitle')?.dirty)">
+                <span *ngIf="requestFormGroup.get('eventTitle')?.errors?.['required']">Please enter a Hall Name</span>
+                <span *ngIf="requestFormGroup.get('eventTitle')?.errors?.['minlength']">Please enter more than {{requestFormGroup.get('eventTitle')?.errors?.['minlength']?.['requiredLength']}} letters</span>
+                <span *ngIf="requestFormGroup.get('eventTitle')?.errors?.['maxlength']">Please enter less than {{requestFormGroup.get('eventTitle')?.errors?.['maxlength']?.['requiredLength']}} letters</span>
+            </div>
+            <label for="eventTitle" class="end-0 me-2 text-c-primary">{{requestFormGroup.get('eventTitle')?.getRawValue().length}}/{{MAX_LEN_SM}}</label>
+        </div>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Event Description" id="eventTitle" formControlName="eventDescription"></textarea>
+            <label for="eventDescription">Event Description</label>
+            <div class="text-danger" *ngIf="requestFormGroup.get('eventDescription')?.errors && (requestFormGroup.get('eventDescription')?.touched || requestFormGroup.get('eventDescription')?.dirty)">
+                <span *ngIf="requestFormGroup.get('eventDescription')?.errors?.['required']">Please write the Description</span>
+                <span *ngIf="requestFormGroup.get('eventDescription')?.errors?.['minlength']">Please enter more than {{requestFormGroup.get('eventDescription')?.errors?.['minlength']?.['requiredLength']}} letters</span>
+                <span *ngIf="requestFormGroup.get('eventDescription')?.errors?.['maxlength']">Please enter less than {{requestFormGroup.get('eventDescription')?.errors?.['maxlength']?.['requiredLength']}} letters</span>
+            </div>
+            <label for="eventDescription" class="end-0 me-2 text-c-primary">{{requestFormGroup.get('eventDescription')?.getRawValue().length}}/{{MAX_LEN_MD}}</label>
+        </div>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Event Description" id="eventTitle" formControlName="eventObjective"></textarea>
+            <label for="eventObjective">Event Description</label>
+            <div class="text-danger" *ngIf="requestFormGroup.get('eventObjective')?.errors && (requestFormGroup.get('eventObjective')?.touched || requestFormGroup.get('eventObjective')?.dirty)">
+                <span *ngIf="requestFormGroup.get('eventObjective')?.errors?.['required']">Please write the Objective</span>
+                <span *ngIf="requestFormGroup.get('eventObjective')?.errors?.['minlength']">Please enter more than {{requestFormGroup.get('eventObjective')?.errors?.['minlength']?.['requiredLength']}} letters</span>
+                <span *ngIf="requestFormGroup.get('eventObjective')?.errors?.['maxlength']">Please enter less than {{requestFormGroup.get('eventObjective')?.errors?.['maxlength']?.['requiredLength']}} letters</span>
+            </div>
+            <label for="eventObjective" class="end-0 me-2 text-c-primary">{{requestFormGroup.get('eventObjective')?.getRawValue().length}}/{{MAX_LEN_LG}}</label>
+        </div>
+        <app-faculty-form-button [mode]="mode" [formIsValid]="requestFormGroup.valid" (addFormEvent)="addEvent()"></app-faculty-form-button>
+</form>

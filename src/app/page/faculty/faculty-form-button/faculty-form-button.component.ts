@@ -2,19 +2,35 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-master-venue-form-buttons',
+  selector: 'app-faculty-form-button',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './master-venue-form-buttons.component.html',
-  styleUrls: ['./master-venue-form-buttons.component.sass']
+  templateUrl: './faculty-form-button.component.html',
+  styleUrls: ['./faculty-form-button.component.sass']
 })
-export class MasterVenueFormButtonsComponent {
+export class FacultyFormButtonComponent {
+
   @Input() mode: string = ""
   @Input() formIsValid: boolean = false
 
   @Output() addFormEvent = new EventEmitter()
   addForm = () => {
     this.addFormEvent.emit()
+  }
+
+  @Output() cancelFormEvent = new EventEmitter()
+  cancelForm = () => {
+    this.cancelFormEvent.emit()
+  }
+
+  @Output() editAddedEvent = new EventEmitter()
+  editAdded = () => {
+    this.editAddedEvent.emit()
+  }
+
+  @Output() submitAddedEvent = new EventEmitter()
+  submitAdded = () => {
+    this.submitAddedEvent.emit()
   }
 
   @Output() toggleEditModeEvent = new EventEmitter()

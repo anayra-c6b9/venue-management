@@ -39,15 +39,6 @@
             <span *ngIf="addVenueFormGroup.get('noOfStandMics')?.errors?.['min']">Please enter more than {{ addVenueFormGroup.get('noOfStandMics')?.errors?.['min']?.['min'] }}</span>
         </div>
       </div>
-      <div class="form-floating col-7">
-        <input type="number" class="form-control" id="floatingPassword" placeholder="Password" formControlName="noOfWhiteBoards">
-        <label class="ms-2 text-c-primary" for="floatingPassword">No. of White Board</label>
-        <div class="text-danger" *ngIf="addVenueFormGroup.get('noOfWhiteBoards')?.errors && (addVenueFormGroup.get('noOfWhiteBoards')?.touched || addVenueFormGroup.get('noOfWhiteBoards')?.dirty)">
-            <span *ngIf="addVenueFormGroup.get('noOfWhiteBoards')?.errors?.['required']">Please enter an amount</span>
-            <span *ngIf="addVenueFormGroup.get('noOfWhiteBoards')?.errors?.['min']">Please enter more than {{ addVenueFormGroup.get('noOfWhiteBoards')?.errors?.['min']?.['min'] }}</span>
-        </div>
-      </div>
-
       <div class="form-check col-8 ms-3">
         <input class="form-check-input" type="checkbox" value="" id="acCheckDefault" formControlName="acAvailability">
         <label class="form-check-label text-c-primary" for="acCheckDefault">
@@ -80,6 +71,5 @@
             <span *ngIf="addVenueFormGroup.get('closingTime')?.errors?.['required']">Please enter a time</span>
         </div>
       </div>
-      <app-master-venue-form-buttons [formIsValid]="addVenueFormGroup.valid" [type]="type"></app-master-venue-form-buttons>      
+      <app-master-venue-form-buttons [formIsValid]="addVenueFormGroup.valid" [mode]="mode" (toggleEditModeEvent)="toggleEditMode()" (deleteVenueEvent)="deleteVenue()" (patchVenueEvent)="patchVenue()"></app-master-venue-form-buttons>      
 </form>
-

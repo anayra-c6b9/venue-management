@@ -6,6 +6,18 @@ export interface CustomLinks {
     name: string,
 }
 
+export interface VenueForm {
+    hallName: string,
+    noOfSeats: Number,
+    noOfMics: Number,
+    noOfCollarMics: Number,
+    noOfStandMics: Number,
+    acAvailabilit: boolean,
+    projectorAvailability: boolean,
+    openingTime: string,
+    closingTime: string
+}
+
 // export interface AddVenueFormGroup extends FormGroup {
 //     hallName: FormControl<string | null>,
 //     noOfSeats: FormControl<Number | null>,

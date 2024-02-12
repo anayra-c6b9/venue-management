@@ -11,5 +11,6 @@ import { MasterVenueFormComponent } from '../master-venue-form/master-venue-form
   styleUrls: ['./master-add-venue.component.sass']
 })
 export class MasterAddVenueComponent {
-  
+  formDisabled = false
+  formMode = 'add'
 }

@@ -17,7 +17,8 @@ export const PAGE_ROUTES: Route[] = [
     },
     {
         path: "faculty",
-        component: FacultyComponent
+        component: FacultyComponent,
+        loadChildren: () => import("./faculty/faculty.routes").then(m => m.FACULTY_ROUTES)
     },
     {
         path: "",
@@ -27,5 +28,5 @@ export const PAGE_ROUTES: Route[] = [
     {
         path: "**",
         component: NotFoundComponent
-    }
+    },
 ]

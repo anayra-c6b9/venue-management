@@ -1,6 +1,11 @@
 <ng-container [ngSwitch]="mode">
     <div *ngSwitchCase="'add'">
-        <button type="button" class="btn btn-success float-end" (click)="addForm()" [disabled]="!formIsValid">+ Add</button>
+        <button type="button" class="btn btn-success ms-2 float-end" (click)="addForm()" [disabled]="!formIsValid">Next</button>
+        <button type="button" class="btn btn-light border float-end" (click)="cancelForm()" >Cancel</button>
+    </div>
+    <div *ngSwitchCase="'submit'">
+        <button type="button" class="btn btn-success ms-2 float-end" (click)="submitAdded()" [disabled]="!formIsValid">Submit</button>
+        <button type="button" class="btn btn-dark border float-end" (click)="editAdded()" >Back</button>
     </div>
     <div *ngSwitchCase="'view'">
         <button type="delete" class="btn btn-danger float-end ms-3" (click)="deleteVenue()" >Delete</button>
