@@ -7,7 +7,7 @@ import { FacultyFormButtonComponent } from '../faculty-form-button/faculty-form-
 @Component({
   selector: 'app-faculty-requirement-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, FacultyFormButtonComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './faculty-requirement-form.component.html',
   styleUrls: ['./faculty-requirement-form.component.sass']
 })
@@ -23,6 +23,12 @@ export class FacultyRequirementFormComponent implements OnInit {
   addEvent = () => {
     this.addEventEmitter.emit()
   }
+
+  @Output() updateValidityEmitter = new EventEmitter()
+  updateValidity = () => {
+    this.updateValidityEmitter.emit(this.registerHallGroup.valid && this.registerFormGroup.valid)
+  }
+
 
   inputIsNumber = (control: AbstractControl): {isinteger: true} | null => {
     if (control.value === "" || control.value === null)
@@ -136,12 +142,6 @@ export class FacultyRequirementFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // document.querySelectorAll(".form-control").forEach(textarea => textarea.addEventListener("keydown", function(this: HTMLTextAreaElement) {
-    //   this.style.overflow = 'hidden';
-    //   this.style.height = '0';
-    //   this.style.height = this.scrollHeight + 'px';
-    //   this.style.paddingTop = "2rem"
-    // }))
     this.registerFormGroup.disable()
   }
 }

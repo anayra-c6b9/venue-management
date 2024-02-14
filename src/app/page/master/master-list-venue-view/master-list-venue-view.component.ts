@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MasterVenueFormComponent } from '../master-venue-form/master-venue-form.component';
 import { ActivatedRoute} from '@angular/router';
 import { VenueForm } from 'src/app/interfaces';
+import { BackButtonComponent } from '../../back-button/back-button.component';
 
 @Component({
   selector: 'app-master-list-venue-view',
   standalone: true,
-  imports: [CommonModule, MasterVenueFormComponent],
+  imports: [CommonModule, MasterVenueFormComponent, BackButtonComponent],
   templateUrl: './master-list-venue-view.component.html',
   styleUrls: ['./master-list-venue-view.component.sass']
 })

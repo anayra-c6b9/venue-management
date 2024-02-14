@@ -8,11 +8,7 @@ import { FacultyYourRequestsViewComponent } from "./faculty-your-requests-view/f
 export const FACULTY_ROUTES: Route[] = [
     {
         path: "register-venue",
-        component: FacultyRegisterVenueComponent
-    },
-    {
-        path: "register-venue/register",
-        loadChildren: () => import("./faculty-register-venue-view/faculty-register-venue.routes").then(m => m.FACULTY_REGISTER_VENUE_ROUTES)
+        loadChildren: () => import("./faculty-register-venue/faculty-register-venue.routes").then(m => m.FACULTY_REGISTER_VENUE_ROUTES)
     },
     {
         path: "your-requests",

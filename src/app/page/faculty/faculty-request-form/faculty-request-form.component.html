@@ -1,33 +1,52 @@
-<form [formGroup]="requestFormGroup" class="pt-4 px-4 d-flex flex-column gap-3">
+<form [formGroup]="requestEventGroup" class="px-4 row gy-3" (change)="toggleTimeFormState()" (change)="updateForm()">
         <div class="form-floating">
-            <textarea class="form-control" id="eventTitle" placeholder="Event Name" formControlName="eventTitle"></textarea>
+            <select class="form-control" id="eventTitle" aria-label="Floating label select example" formControlName="eventTitle">
+                <option selected value="">-- --</option>
+                    <option value="Art Classes by Ishan Awasthi">Art Classes by Ishan Awasthi</option>
+                    <option value="Smart Finance Classes">Smart Finance Classes</option>
+                    <option value="Programming in Python">Programming in Python</option>
+            </select>
             <label class="ms-2 text-c-primary" for="eventTitle">Event Name</label>
-            <div class="text-danger" *ngIf="requestFormGroup.get('eventTitle')?.errors && (requestFormGroup.get('eventTitle')?.touched || requestFormGroup.get('eventTitle')?.dirty)">
-                <span *ngIf="requestFormGroup.get('eventTitle')?.errors?.['required']">Please enter a Hall Name</span>
-                <span *ngIf="requestFormGroup.get('eventTitle')?.errors?.['minlength']">Please enter more than {{requestFormGroup.get('eventTitle')?.errors?.['minlength']?.['requiredLength']}} letters</span>
-                <span *ngIf="requestFormGroup.get('eventTitle')?.errors?.['maxlength']">Please enter less than {{requestFormGroup.get('eventTitle')?.errors?.['maxlength']?.['requiredLength']}} letters</span>
+            <div class="text-danger" *ngIf="requestEventGroup.get('eventTitle')?.errors && (requestEventGroup.get('eventTitle')?.touched || requestEventGroup.get('eventTitle')?.dirty)">
+                <span *ngIf="requestEventGroup.get('eventTitle')?.errors?.['required']">Please enter an Event Name</span>
             </div>
-            <label for="eventTitle" class="end-0 me-2 text-c-primary">{{requestFormGroup.get('eventTitle')?.getRawValue().length}}/{{MAX_LEN_SM}}</label>
         </div>
-        <div class="form-floating">
-            <textarea class="form-control" placeholder="Event Description" id="eventTitle" formControlName="eventDescription"></textarea>
-            <label for="eventDescription">Event Description</label>
-            <div class="text-danger" *ngIf="requestFormGroup.get('eventDescription')?.errors && (requestFormGroup.get('eventDescription')?.touched || requestFormGroup.get('eventDescription')?.dirty)">
-                <span *ngIf="requestFormGroup.get('eventDescription')?.errors?.['required']">Please write the Description</span>
-                <span *ngIf="requestFormGroup.get('eventDescription')?.errors?.['minlength']">Please enter more than {{requestFormGroup.get('eventDescription')?.errors?.['minlength']?.['requiredLength']}} letters</span>
-                <span *ngIf="requestFormGroup.get('eventDescription')?.errors?.['maxlength']">Please enter less than {{requestFormGroup.get('eventDescription')?.errors?.['maxlength']?.['requiredLength']}} letters</span>
+</form>
+<form [formGroup]="requestDateGroup" class="pt-4 px-4 row gy-3" (change)="generateTimeSlots()" (change)="updateForm()">
+    <div class="form-floating col-6">
+        <input type="date" class="form-control" placeholder="Event Description" id="startingDate" formControlName="startingDate">
+        <label for="startingDate" class="ms-2 text-c-primary">Starting Date</label>
+        <div class="text-danger" *ngIf="requestDateGroup.get('startingDate')?.errors && (requestDateGroup.get('startingDate')?.touched || requestDateGroup.get('startingDate')?.dirty)">
+            <span *ngIf="requestDateGroup.get('startingDate')?.errors?.['required']">Please enter starting date</span>
+            <span *ngIf="requestDateGroup.get('startingDate')?.errors?.['currentdate']">You cannot create an event in past</span>
+        </div>
+    </div>
+    <div class="form-floating col-6">
+        <input type="date" class="form-control" placeholder="Event Description" id="endingDate" formControlName="endingDate">
+        <label for="endingDate" class="ms-2 text-c-primary">Ending Date</label>
+        <div class="text-danger" *ngIf="requestDateGroup.get('endingDate')?.errors && (requestDateGroup.get('endingDate')?.touched || requestDateGroup.get('endingDate')?.dirty)">
+            <span *ngIf="requestDateGroup.get('endingDate')?.errors?.['required']">Please enter Ending date</span>
+            <span *ngIf="requestDateGroup.get('endingDate')?.errors?.['currentdate']">You cannot create an event in past</span>
+        </div>
+    </div>
+</form>
+<!-- <div>{{TIME_INPUT}}</div> -->
+<form [formGroup]="requestTimeGroup" class="pt-4 px-4 row gy-3" (change)="updateForm()">
+        <ng-template ngFor let-item [ngForOf]="[].constructor(TIME_INPUT)" let-i="index">
+            <div class="border-top pt-2">Add Time for {{ createNewDate(i) }}</div>
+            <div class="form-floating col-6">
+                <input type="time" class="form-control" placeholder="Event Description" [id]="'starting-time-'+i" formControlName="starting-time-{{i}}">
+                <label [for]="'starting-time-'+i" class="ms-2 text-c-primary">Starting Time</label>
+                <div class="text-danger" *ngIf="requestTimeGroup.get('starting-time-'+i)?.errors && (requestTimeGroup.get('starting-time-'+i)?.touched || requestTimeGroup.get('starting-time-'+i)?.dirty)">
+                    <span *ngIf="requestTimeGroup.get('starting-time-'+i)?.errors?.['required']">Please enter Starting Time</span>
+                </div>
             </div>
-            <label for="eventDescription" class="end-0 me-2 text-c-primary">{{requestFormGroup.get('eventDescription')?.getRawValue().length}}/{{MAX_LEN_MD}}</label>
-        </div>
-        <div class="form-floating">
-            <textarea class="form-control" placeholder="Event Description" id="eventTitle" formControlName="eventObjective"></textarea>
-            <label for="eventObjective">Event Description</label>
-            <div class="text-danger" *ngIf="requestFormGroup.get('eventObjective')?.errors && (requestFormGroup.get('eventObjective')?.touched || requestFormGroup.get('eventObjective')?.dirty)">
-                <span *ngIf="requestFormGroup.get('eventObjective')?.errors?.['required']">Please write the Objective</span>
-                <span *ngIf="requestFormGroup.get('eventObjective')?.errors?.['minlength']">Please enter more than {{requestFormGroup.get('eventObjective')?.errors?.['minlength']?.['requiredLength']}} letters</span>
-                <span *ngIf="requestFormGroup.get('eventObjective')?.errors?.['maxlength']">Please enter less than {{requestFormGroup.get('eventObjective')?.errors?.['maxlength']?.['requiredLength']}} letters</span>
+            <div class="form-floating col-6">
+                <input type="time" class="form-control" placeholder="Event Description" [id]="'ending-time-'+i" formControlName="ending-time-{{i}}">
+                <label [for]="'ending-time-'+i" class="ms-2 text-c-primary">Ending Time</label>
+                <div class="text-danger" *ngIf="requestTimeGroup.get('ending-time-'+i)?.errors && (requestTimeGroup.get('ending-time-'+i)?.touched || requestTimeGroup.get('ending-time-'+i)?.dirty)">
+                    <span *ngIf="requestTimeGroup.get('ending-time-'+i)?.errors?.['required']">Please enter Ending Time</span>
+                </div>
             </div>
-            <label for="eventObjective" class="end-0 me-2 text-c-primary">{{requestFormGroup.get('eventObjective')?.getRawValue().length}}/{{MAX_LEN_LG}}</label>
-        </div>
-        <app-faculty-form-button [mode]="mode" [formIsValid]="requestFormGroup.valid" (addFormEvent)="addEvent()"></app-faculty-form-button>
+        </ng-template>
 </form>
