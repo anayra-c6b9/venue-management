@@ -39,12 +39,12 @@ export class FacultyFormButtonComponent {
   }
 
   @Output() deleteVenueEvent = new EventEmitter()
-  deleteVenue = () => {
+  deleteEvent = () => {
     this.deleteVenueEvent.emit()
   }
 
   @Output() patchVenueEvent = new EventEmitter()
-  patchVenue = () => {
+  patchEvent = () => {
     this.patchVenueEvent.emit()
   }
 

@@ -18,7 +18,7 @@ export class FacultyRegisterVenueRequirementComponent {
   constructor(private _router: Router) {}
 
   submitForm = () => {
-    console.log("adding")
+    console.log("submitting")
     this._router.navigate(["/faculty/your-requests"])
   }
 

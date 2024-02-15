@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -11,7 +11,7 @@ import { FacultyFormButtonComponent } from '../faculty-form-button/faculty-form-
   templateUrl: './faculty-requirement-form.component.html',
   styleUrls: ['./faculty-requirement-form.component.sass']
 })
-export class FacultyRequirementFormComponent implements OnInit {
+export class FacultyRequirementFormComponent implements OnInit, OnChanges {
   // MIN_LEN = 10
   // MAX_LEN_SM = 60
   // MAX_LEN_MD = 200
@@ -19,6 +19,23 @@ export class FacultyRequirementFormComponent implements OnInit {
 
   @Input() mode = "";
 
+  @Input() completeFormData = {
+    hallName: "",
+      noOfSeats: 0,
+      noOfMics: 0,
+      noOfStandMics: 0,
+      noOfCollarMics: 0,
+      noOfLeatherChair: 0,
+      noOfKhada: 0,
+      acRequirement: false,
+      laptopRequirement: false,
+      whiteBoardRequirement: false,
+      lampRequirement: false,
+      soundSystemRequirement: false,
+      projectorRequirement: false,
+      projectorSliderRequirement: false
+  }
+  
   @Output() addEventEmitter = new EventEmitter()
   addEvent = () => {
     this.addEventEmitter.emit()
@@ -141,7 +158,47 @@ export class FacultyRequirementFormComponent implements OnInit {
     }
   }
 
+  applyFormMode = (mode: string) => {
+    switch(mode) {
+      case "submit":
+      case "add": this.registerFormGroup.disable();
+                  this.registerHallGroup.enable();
+                  break;
+      case "view": this.registerFormGroup.disable();
+                  this.registerHallGroup.disable();
+                  break;
+      case "edit": this.registerFormGroup.enable();
+                  this.registerHallGroup.enable();
+                  break;
+      default: this.registerFormGroup.disable();
+                this.registerHallGroup.disable();
+    }
+  }
+
   ngOnInit(): void {
-    this.registerFormGroup.disable()
+
+    if(this.completeFormData.hallName !== "") {
+      this.registerHallGroup.controls.hallName.setValue(this.completeFormData.hallName)
+      this.registerFormGroup.controls.noOfSeats.setValue(this.completeFormData.noOfSeats)
+      this.registerFormGroup.controls.noOfMics.setValue(this.completeFormData.noOfMics)
+      this.registerFormGroup.controls.noOfStandMics.setValue(this.completeFormData.noOfStandMics)
+      this.registerFormGroup.controls.noOfCollarMics.setValue(this.completeFormData.noOfCollarMics)
+      this.registerFormGroup.controls.noOfLeatherChair.setValue(this.completeFormData.noOfLeatherChair)
+      this.registerFormGroup.controls.noOfKhada.setValue(this.completeFormData.noOfKhada)
+      this.registerFormGroup.controls.acRequirement.setValue(this.completeFormData.acRequirement)
+      this.registerFormGroup.controls.laptopRequirement.setValue(this.completeFormData.laptopRequirement)
+      this.registerFormGroup.controls.whiteBoardRequirement.setValue(this.completeFormData.whiteBoardRequirement)
+      this.registerFormGroup.controls.lampRequirement.setValue(this.completeFormData.lampRequirement)
+      this.registerFormGroup.controls.soundSystemRequirement.setValue(this.completeFormData.soundSystemRequirement)
+      this.registerFormGroup.controls.projectorRequirement.setValue(this.completeFormData.projectorRequirement)
+      this.registerFormGroup.controls.projectorSliderRequirement.setValue(this.completeFormData.projectorSliderRequirement)
+    }
+    this.applyFormMode(this.mode)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes?.['mode']) {
+      this.applyFormMode(this.mode)
+    }
   }
 }

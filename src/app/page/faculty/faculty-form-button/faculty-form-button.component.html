@@ -10,11 +10,11 @@
     </div>
     <div *ngSwitchCase="'view'" class="d-inline-block">
         <button type="button" class="btn btn-light border" (click)="toggleEditMode()" >Edit</button>
-        <button type="delete" class="btn btn-danger ms-3" (click)="deleteVenue()" >Delete</button>
+        <button type="delete" class="btn btn-danger ms-3" (click)="deleteEvent()" >Delete</button>
     </div>
     <div *ngSwitchCase="'edit'" class="d-inline-block">
         <button type="button" class="btn btn-light border" (click)="toggleEditMode()" >Cancel</button>
-        <button type="button" class="btn btn-success ms-3" (click)="patchVenue()" >Submit</button>
+        <button type="button" class="btn btn-success ms-3" (click)="patchEvent()" >Submit</button>
     </div>
     <div *ngSwitchDefault></div>
 </ng-container>

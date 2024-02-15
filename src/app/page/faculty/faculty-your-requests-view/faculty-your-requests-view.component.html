@@ -1,8 +1,8 @@
 <div>
-    <h5 class="mx-4 mb-3 text-c-primary">Hall Request</h5>
-    <app-faculty-request-form></app-faculty-request-form>
+    <h5 class="mx-4 mb-3 text-c-primary text-decoration-underline">Hall Request</h5>
+    <app-faculty-request-form [completeFormData]="requestFormData" [mode]="mode"></app-faculty-request-form>
     <br>
-    <h5 class="mx-4 mb-3 text-c-primary">Hall Requirements</h5>
-    <app-faculty-requirement-form></app-faculty-requirement-form>
-    <app-faculty-form-button [mode]="mode"></app-faculty-form-button>
+    <h5 class="mx-4 mb-3 text-c-primary text-decoration-underline">Hall Requirements</h5>
+    <app-faculty-requirement-form [completeFormData]="requirementFormData"  [mode]="mode"></app-faculty-requirement-form>
+    <app-faculty-form-button [mode]="mode" (toggleEditModeEvent)="toggleFormMode()" (patchVenueEvent)="patchForm()"></app-faculty-form-button>
 </div>

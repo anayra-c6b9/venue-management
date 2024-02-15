@@ -5,7 +5,7 @@
                 <button class="nav-link col" [id]="tab.link" data-bs-toggle="tab" data-bs-target="#nav-tab-content" type="button" role="tab" aria-controls="nav-tab-content" [attr.aria-selected]="tab.id === 1" [routerLink]="tab.link" routerLinkActive="active text-c-primary">{{tab.name}}</button>
             </ng-template>  
         </div>
-    </nav> 
+    </nav>
     <div class="tab-content border border-top-0 rounded-bottom bg-white pt-4" id="nav-tabContent">
         <div class="tab-pane fade show active mb-4" id="nav-tab-content" role="tabpanel">
             <router-outlet></router-outlet>

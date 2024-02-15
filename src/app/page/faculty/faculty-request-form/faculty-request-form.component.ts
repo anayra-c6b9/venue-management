@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { FacultyFormButtonComponent } from '../faculty-form-button/faculty-form-button.component';
@@ -12,7 +12,7 @@ import { OlderDateValidator } from 'src/app/utils/validators/older-date-validato
   templateUrl: './faculty-request-form.component.html',
   styleUrls: ['./faculty-request-form.component.sass']
 })
-export class FacultyRequestFormComponent implements OnInit{
+export class FacultyRequestFormComponent implements OnInit, OnChanges{
   MIN_LEN = 10
   MAX_LEN_SM = 60
   MAX_LEN_MD = 200
@@ -20,6 +20,14 @@ export class FacultyRequestFormComponent implements OnInit{
   TIME_INPUT = 0;
 
   @Input() mode = "";
+
+  @Input() completeFormData = {
+    eventTitle: "",
+    startingDate: "",
+    endingDate: "",
+    noOfEventDay: 0,
+    eventTime: []
+  }
 
   @Output() addEventEmitter = new EventEmitter()
   addEvent = () => {
@@ -100,6 +108,12 @@ export class FacultyRequestFormComponent implements OnInit{
       this.TIME_INPUT = 0
       return
     }
+    this.createTimeSlots()
+  }
+
+  createTimeSlots = (dateData: Array<{startingTime: string, endingTime: string}> = []) => {
+    // console.log("executing create time slots")
+    // console.log(dateData)
     if(this.requestDateGroup.value.endingDate && this.requestDateGroup.value.startingDate){
       const startingDate = new Date(this.requestDateGroup.value.startingDate)
       const endingDate = new Date(this.requestDateGroup.value.endingDate)
@@ -109,11 +123,11 @@ export class FacultyRequestFormComponent implements OnInit{
         return
       } 
       for(let i = 0; i < noOfDates; i++) {
-        this.requestTimeGroup.addControl("starting-time-"+i, new FormControl("", Validators.required))
-        this.requestTimeGroup.addControl("ending-time-"+i, new FormControl("", [Validators.required, ]))
+        this.requestTimeGroup.addControl("starting-time-"+i, new FormControl(dateData[i]?.startingTime || "", Validators.required))
+        this.requestTimeGroup.addControl("ending-time-"+i, new FormControl(dateData[i]?.endingTime || "", [Validators.required, ]))
       }
       this.TIME_INPUT = noOfDates
-    } 
+    }
   }
 
   /* 
@@ -140,11 +154,43 @@ export class FacultyRequestFormComponent implements OnInit{
     return `${newDate.getDate() < 10 ? "0"+newDate.getDate() : newDate.getDate()} ${newDate.toLocaleString('default', {month: 'short'})}, ${newDate.getFullYear()}`
   }
 
-  ngOnInit(): void {
-    // document.querySelectorAll(".form-control").forEach(textarea =>{
-    //   textarea.addEventListener("keyup", this.resize)
-    // })
-   this.requestDateGroup.disable()
-  
+  applyFormMode = (mode: string) => {
+    switch(mode) {
+      case "view": this.requestEventGroup.disable()
+                  this.requestDateGroup.disable()
+                  this.requestTimeGroup.disable()
+                  break;
+      case "submit":
+      case "add": this.requestDateGroup.disable()
+                  this.requestEventGroup.enable()
+                  this.requestTimeGroup.enable()
+                  break;
+      case "edit": this.requestDateGroup.enable()
+                  this.requestTimeGroup.enable()
+                  this.requestEventGroup.enable()
+                  break;
+      default: this.requestEventGroup.disable()
+                this.requestDateGroup.disable()
+                this.requestTimeGroup.disable()
+    }
   }
+
+  ngOnInit(): void {
+    if(this.completeFormData.eventTitle !== ""){
+      this.requestEventGroup.controls.eventTitle.setValue(this.completeFormData.eventTitle)
+      this.requestDateGroup.controls.startingDate.setValue(this.completeFormData.startingDate)
+      this.requestDateGroup.controls.endingDate.setValue(this.completeFormData.endingDate)
+      this.TIME_INPUT = this.completeFormData.noOfEventDay
+      this.createTimeSlots(this.completeFormData.eventTime)
+    }
+
+    this.applyFormMode(this.mode)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes?.['mode']) {
+      this.applyFormMode(this.mode)
+    }
+  }
+
 }

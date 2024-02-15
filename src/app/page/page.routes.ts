@@ -13,7 +13,8 @@ export const PAGE_ROUTES: Route[] = [
     },
     {
         path: "admin",
-        component: AdminComponent
+        component: AdminComponent,
+        loadChildren: () => import("./admin/admin.routes").then(m => m.FACULTY_ROUTES)
     },
     {
         path: "faculty",
