@@ -1,0 +1,8 @@
+<div class="pb-3">
+    <app-back-button></app-back-button>
+    <div class="px-4 pt-4 d-grid grid-column gap-4">
+        <app-event-request-data></app-event-request-data>
+        <app-event-requirement-data></app-event-requirement-data>
+    </div>
+    <app-admin-button [mode]="mode" (pendingRequestEvent)="pendingRequest()" (acceptRequestEvent)="acceptRequest()"></app-admin-button>
+</div>
