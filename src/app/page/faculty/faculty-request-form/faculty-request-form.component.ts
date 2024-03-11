@@ -4,6 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validato
 import { FacultyFormButtonComponent } from '../faculty-form-button/faculty-form-button.component';
 import { CurrentDateValidator } from 'src/app/utils/validators/date-validator';
 import { OlderDateValidator } from 'src/app/utils/validators/older-date-validator';
+import { TrackById } from 'src/app/utils/trackbyid/trackById';
+import { FacultyEventsCollection } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-faculty-request-form',
@@ -18,6 +20,7 @@ export class FacultyRequestFormComponent implements OnInit, OnChanges{
   MAX_LEN_MD = 200
   MAX_LEN_LG = 600
   TIME_INPUT = 0;
+  trackByVenue = TrackById
 
   @Input() mode = "";
 
@@ -29,13 +32,17 @@ export class FacultyRequestFormComponent implements OnInit, OnChanges{
     eventTime: []
   }
 
+  @Input() eventCollection: FacultyEventsCollection = []
+
   @Output() addEventEmitter = new EventEmitter()
   addEvent = () => {
     this.addEventEmitter.emit()
-  }
+  } 
 
   @Output() updateFormValidity = new EventEmitter()
   updateForm = () => {
+    const select = document.getElementById('eventTitle')
+    console.log(select)
     this.updateFormValidity.emit(this.requestDateGroup.valid && this.requestEventGroup.valid)
   }
 
@@ -173,6 +180,20 @@ export class FacultyRequestFormComponent implements OnInit, OnChanges{
                 this.requestDateGroup.disable()
                 this.requestTimeGroup.disable()
     }
+  }
+
+  updateFormValue = () => {
+    // formInputs = {
+    //   eventName: this.requestEventGroup.value.eventTitle,
+    //   eventStartingDate: ,
+    //   "eventEndingDate": ,
+    //   "eventDuration": ,
+    //   "eventTimes": [
+    //   ],
+    //   eventStatus= "pending",
+    //   eventId: document.getElementById('#eventTitle'),
+    //   "facultyId": localStorage.getItem("venue_user_id")
+    // }
   }
 
   ngOnInit(): void {

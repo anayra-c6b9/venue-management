@@ -30,7 +30,12 @@ export class MasterComponent {
         id: 3,
         link: ["./add-venue"],
         name: "Add Venue"
-      }
+      },
+      // {
+      //   id: 4,
+      //   link: ["./dummy"],
+      //   name: "Evaluate"
+      // }
     ]
   }
 }

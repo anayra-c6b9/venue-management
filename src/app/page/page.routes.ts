@@ -25,9 +25,5 @@ export const PAGE_ROUTES: Route[] = [
         path: "",
         redirectTo: "master",
         pathMatch: "full"
-    },
-    {
-        path: "**",
-        component: NotFoundComponent
-    },
+    }
 ]

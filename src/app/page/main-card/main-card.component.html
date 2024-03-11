@@ -1,4 +1,4 @@
-<div class="col-sm-10 col-md-8 col-xxl-6 mx-auto">
+<div class="col-sm-10 col-md-8 col-xxl-6 mx-auto my-sm-5">
     <nav>
         <div class="nav nav-tabs row m-0" id="nav-tab" role="tablist">
             <ng-template ngFor let-tab [ngForOf]="tabs" let-i="index" [ngForTrackBy]="trackbyfn">
@@ -7,7 +7,7 @@
         </div>
     </nav>
     <div class="tab-content border border-top-0 rounded-bottom bg-white pt-4 position-relative" id="nav-tabContent">
-        <div class="tab-pane fade show active mb-4" id="nav-tab-content" role="tabpanel">
+        <div class="tab-pane fade show active mb-4 overflow-hidden" id="nav-tab-content" role="tabpanel">
             <router-outlet></router-outlet>
         </div>
     </div>

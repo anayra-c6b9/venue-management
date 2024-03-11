@@ -18,6 +18,75 @@ export interface VenueForm {
     closingTime: string
 }
 
+// faculty login
+// --posting
+export interface LoginInfo {
+    email: string,
+    password: string
+}
+
+// --geting
+export interface LoginResponse {
+    facultyId: string, 
+    facultyRole: string, 
+    message: string
+}
+
+// faculty Events
+// -- getting
+export interface FacultyEvents {
+    id: string,
+    facultyId: string,
+    eventName: string
+}
+
+export interface FacultyEventsCollection extends Array<FacultyEvents> {}
+
+// venue Events
+
+//--posting
+export interface FacultyVenueEvent {
+    "eventName": string,
+    "eventStartingDate": string,
+    "eventEndingDate": string,
+    "eventDuration": Number,
+    "eventTimes": [
+      {
+        "date": string,
+        "startingTime": string,
+        "endingTime": string
+      }
+    ],
+    "eventStatus": string,
+    "eventId": string,
+    "facultyId": string
+}
+
+export interface FacultyVenueEventsCollection extends Array<FacultyVenueEvent> {}
+
+//--getting
+export interface VenueEvent {
+    "id": string,
+    "eventName": string,
+    "eventStartingDate": string,
+    "eventEndingDate": string,
+    "eventDuration": Number,
+    "eventTimes": [
+      {
+        "date": string,
+        "startingTime": string,
+        "endingTime": string
+      }
+    ],
+    "eventStatus": string,
+    "eventId": string,
+    "facultyId": string
+}
+
+export interface VenueEventsCollection extends Array<VenueEvent> {}
+
+
+
 // export interface AddVenueFormGroup extends FormGroup {
 //     hallName: FormControl<string | null>,
 //     noOfSeats: FormControl<Number | null>,

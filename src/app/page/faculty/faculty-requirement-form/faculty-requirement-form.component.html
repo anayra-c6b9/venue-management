@@ -51,7 +51,7 @@
             <span *ngIf="registerFormGroup.get('noOfCollarMics')?.errors?.['max']">Maximum no. of collar mic is {{registerFormGroup.get('noOfCollarMics')?.errors?.['max']?.['max']}}</span>
         </div>
     </div>
-    <div class="form-floating col-8">
+    <div class="form-floating col-8 col-md-6">
         <input type="number" class="form-control" id="noOfLeatherChair" placeholder="No. of Leather Chair" formControlName="noOfLeatherChair">
         <label for="noOfLeatherChair" class="ms-2">No. of Leather Chair</label>
         <div class="text-danger" *ngIf="registerFormGroup.get('noOfLeatherChair')?.errors && (registerFormGroup.get('noOfLeatherChair')?.touched || registerFormGroup.get('noOfLeatherChair')?.dirty)">

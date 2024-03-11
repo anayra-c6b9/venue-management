@@ -68,7 +68,7 @@ export class FacultyRequirementFormComponent implements OnInit, OnChanges {
       [
         Validators.required,
         Validators.min(0),
-        Validators.max(4),
+        Validators.max(400),
         this.inputIsNumber
       ]
     ),

@@ -1,10 +1,10 @@
-<form [formGroup]="requestEventGroup" class="px-3 row gy-3" (change)="toggleTimeFormState()" (change)="updateForm()">
+<form [formGroup]="requestEventGroup" class="px-4 row gy-3" (change)="toggleTimeFormState()" (change)="updateForm()">
         <div class="form-floating">
             <select class="form-control" id="eventTitle" aria-label="Floating label select example" formControlName="eventTitle">
                 <option selected value="">-- --</option>
-                    <option value="Art Classes by Ishan Awasthi">Art Classes by Ishan Awasthi</option>
-                    <option value="Smart Finance Classes">Smart Finance Classes</option>
-                    <option value="Programming in Python">Programming in Python</option>
+                <ng-template ngFor let-event [ngForOf]="eventCollection" let-i="index" [ngForTrackBy]="trackByVenue">
+                    <option [value]="event.id">{{ event.eventName }}</option>
+                </ng-template>
             </select>
             <label class="ms-2 text-c-primary" for="eventTitle">Event Name</label>
             <div class="text-danger" *ngIf="requestEventGroup.get('eventTitle')?.errors && (requestEventGroup.get('eventTitle')?.touched || requestEventGroup.get('eventTitle')?.dirty)">
@@ -12,7 +12,7 @@
             </div>
         </div>
 </form>
-<form [formGroup]="requestDateGroup" class="pt-4 px-3 row gy-3" (change)="generateTimeSlots()" (change)="updateForm()">
+<form [formGroup]="requestDateGroup" class="pt-4 px-4 row gy-3" (change)="generateTimeSlots()" (change)="updateForm()">
     <div class="form-floating col-6">
         <input type="date" class="form-control" placeholder="Event Description" id="startingDate" formControlName="startingDate">
         <label for="startingDate" class="ms-2 text-c-primary">Starting Date</label>
@@ -31,7 +31,7 @@
     </div>
 </form>
 <!-- <div>{{TIME_INPUT}}</div> -->
-<form [formGroup]="requestTimeGroup" class="pt-4 px-3 row gy-3" (change)="updateForm()">
+<form [formGroup]="requestTimeGroup" class="pt-4 px-4 row gy-3" (change)="updateForm()">
         <ng-template ngFor let-item [ngForOf]="[].constructor(TIME_INPUT)" let-i="index">
             <div class="border-top pt-2">Add Time for {{ createNewDate(i) }}</div>
             <div class="form-floating col-6">

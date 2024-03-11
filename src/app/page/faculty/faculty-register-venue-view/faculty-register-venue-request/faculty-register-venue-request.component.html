@@ -1,2 +1,2 @@
-<app-faculty-request-form [mode]="formMode" (addEventEmitter)="registerFormRequest()" (updateFormValidity)="setForm($event)"></app-faculty-request-form>
+<app-faculty-request-form [mode]="formMode" [eventCollection]="eventCollection" (addEventEmitter)="registerFormRequest()" (updateFormValidity)="setForm($event)"></app-faculty-request-form>
 <app-faculty-form-button [mode]="formMode" [formIsValid]="formValidity" (addFormEvent)="addForm()"></app-faculty-form-button>
