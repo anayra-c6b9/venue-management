@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FacultyFormButtonComponent } from '../faculty-form-button/faculty-form-button.component';
+import { FacultyVenueRequirement } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-faculty-requirement-form',
@@ -19,21 +20,24 @@ export class FacultyRequirementFormComponent implements OnInit, OnChanges {
 
   @Input() mode = "";
 
-  @Input() completeFormData = {
+  @Input() eventId = "";
+
+  @Input() completeFormData: FacultyVenueRequirement = {
+    hallId: "",
     hallName: "",
       noOfSeats: 0,
       noOfMics: 0,
       noOfStandMics: 0,
       noOfCollarMics: 0,
       noOfLeatherChair: 0,
-      noOfKhada: 0,
       acRequirement: false,
       laptopRequirement: false,
       whiteBoardRequirement: false,
       lampRequirement: false,
       soundSystemRequirement: false,
       projectorRequirement: false,
-      projectorSliderRequirement: false
+      projectorSliderRequirement: false,
+      venueEventId: ""
   }
   
   @Output() addEventEmitter = new EventEmitter()

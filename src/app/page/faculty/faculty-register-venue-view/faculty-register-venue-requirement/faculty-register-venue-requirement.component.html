@@ -1,2 +1,2 @@
-<app-faculty-requirement-form [mode]="formMode" (updateValidityEmitter)="updateValidity($event)"></app-faculty-requirement-form>
+<app-faculty-requirement-form [mode]="formMode" [eventId]="eventId" (updateValidityEmitter)="updateValidity($event)"></app-faculty-requirement-form>
 <app-faculty-form-button [mode]="formMode" [formIsValid]="formValidity" (submitAddedEvent)="submitForm()"></app-faculty-form-button>

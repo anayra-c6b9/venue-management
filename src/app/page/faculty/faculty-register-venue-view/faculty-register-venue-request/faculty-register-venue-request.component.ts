@@ -17,6 +17,16 @@ export class FacultyRegisterVenueRequestComponent implements OnInit {
   formMode="add"
   formValidity=false
   eventCollection = []
+  formData: FacultyVenueEvent = {
+    eventName: "",
+    eventStartingDate: "",
+    eventEndingDate: "",
+    eventDuration: 0,
+    eventTimes: [],
+    eventStatus: "",
+    eventId: "",
+    facultyId: ""
+  }
 
   constructor(
     private _router: Router,
@@ -25,7 +35,6 @@ export class FacultyRegisterVenueRequestComponent implements OnInit {
   
   ngOnInit(): void {
     const facultyId = localStorage.getItem('venue_user_id')! as string;
-    console.log(facultyId)
     this._facultyService.getEventsApi(facultyId)
       .then((res: any) => {
         this.eventCollection = res;
@@ -35,10 +44,8 @@ export class FacultyRegisterVenueRequestComponent implements OnInit {
       })
   }
 
-  registerFormRequest = () => {
-    // post event and 
-    console.log("register Form Request")
-    this._router.navigate(["faculty/register-venue/register/requirement-form"])
+  registerFormRequest = (updatedValue: FacultyVenueEvent) => {
+    this.formData = updatedValue;
   }
 
   setForm = (validity: boolean) => {
@@ -46,9 +53,19 @@ export class FacultyRegisterVenueRequestComponent implements OnInit {
   }
 
   addForm = () => {
-    console.log("added");
-    
-    this._router.navigate(["/faculty/register-venue/register/requirement-form"])
+    this._facultyService.postVenueEventApi(this.formData)
+      .then((res: any) => {
+        this._router.navigate(
+          ["/faculty/register-venue/register/requirement-form"],
+          {queryParams: {
+              event: res.id
+            }
+          }
+        )
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
 }

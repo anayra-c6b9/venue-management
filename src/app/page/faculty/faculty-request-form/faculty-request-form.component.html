@@ -31,7 +31,7 @@
     </div>
 </form>
 <!-- <div>{{TIME_INPUT}}</div> -->
-<form [formGroup]="requestTimeGroup" class="pt-4 px-4 row gy-3" (change)="updateForm()">
+<form id="timeForm" [formGroup]="requestTimeGroup" class="pt-4 px-4 row gy-3" (change)="updateForm()">
         <ng-template ngFor let-item [ngForOf]="[].constructor(TIME_INPUT)" let-i="index">
             <div class="border-top pt-2">Add Time for {{ createNewDate(i) }}</div>
             <div class="form-floating col-6">

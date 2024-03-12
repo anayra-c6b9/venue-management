@@ -5,7 +5,7 @@ import { FacultyFormButtonComponent } from '../faculty-form-button/faculty-form-
 import { CurrentDateValidator } from 'src/app/utils/validators/date-validator';
 import { OlderDateValidator } from 'src/app/utils/validators/older-date-validator';
 import { TrackById } from 'src/app/utils/trackbyid/trackById';
-import { FacultyEventsCollection } from 'src/app/interfaces';
+import { EventTimes, FacultyEventsCollection, FacultyVenueEvent } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-faculty-request-form',
@@ -35,15 +35,14 @@ export class FacultyRequestFormComponent implements OnInit, OnChanges{
   @Input() eventCollection: FacultyEventsCollection = []
 
   @Output() addEventEmitter = new EventEmitter()
-  addEvent = () => {
-    this.addEventEmitter.emit()
+  addEvent = (value: FacultyVenueEvent) => {
+    this.addEventEmitter.emit(value)
   } 
 
   @Output() updateFormValidity = new EventEmitter()
   updateForm = () => {
-    const select = document.getElementById('eventTitle')
-    console.log(select)
-    this.updateFormValidity.emit(this.requestDateGroup.valid && this.requestEventGroup.valid)
+    this.updateFormValidity.emit(this.requestDateGroup.valid && this.requestEventGroup.valid);
+    this.addEvent(this.updateFormValue());
   }
 
     /*
@@ -116,6 +115,11 @@ export class FacultyRequestFormComponent implements OnInit, OnChanges{
       return
     }
     this.createTimeSlots()
+
+    
+    // const selectElement = document.getElementById('eventTitle')! as HTMLSelectElement;
+    // console.log("selected Value ", selectElement.selectedIndex);
+
   }
 
   createTimeSlots = (dateData: Array<{startingTime: string, endingTime: string}> = []) => {
@@ -183,17 +187,60 @@ export class FacultyRequestFormComponent implements OnInit, OnChanges{
   }
 
   updateFormValue = () => {
-    // formInputs = {
-    //   eventName: this.requestEventGroup.value.eventTitle,
-    //   eventStartingDate: ,
-    //   "eventEndingDate": ,
-    //   "eventDuration": ,
-    //   "eventTimes": [
-    //   ],
-    //   eventStatus= "pending",
-    //   eventId: document.getElementById('#eventTitle'),
-    //   "facultyId": localStorage.getItem("venue_user_id")
-    // }
+    const selectElement = document.getElementById('eventTitle')! as HTMLSelectElement;
+    const startingDate = this.requestDateGroup.value.startingDate || "";
+    const endingDate = this.requestDateGroup.value.endingDate || "";
+    const dateDifference = this.getDateDifference(startingDate, endingDate)
+
+    const formInputs:FacultyVenueEvent = {
+      eventName: this.eventCollection[selectElement.selectedIndex - 1].eventName,
+      eventStartingDate: startingDate,
+      eventEndingDate: endingDate,
+      eventDuration: dateDifference,
+      eventTimes: this.getEventTimes(startingDate, dateDifference),
+      eventStatus: "pending",
+      eventId: this.eventCollection[selectElement.selectedIndex - 1].id,
+      facultyId: localStorage.getItem("venue_user_id")! as string
+    }
+
+    return formInputs;
+  }
+
+  // functions related to get Form Inputs
+
+  getDateDifference = (date1str: string | null, date2str: string | null) => {
+    if(date1str && date2str) {
+      const date1 = new Date(date1str);
+      const date2 = new Date(date2str);
+
+      return (date2.getTime() - date1.getTime())/(24*60*60*1000) + 1;
+    }
+
+    return 0
+  }
+
+  getEventTimes = (startingDate: string | null, duration: Number) => {
+    const collection: Array<EventTimes> = [];
+    
+    if(startingDate && duration){
+      const initialDate = new Date(startingDate);
+      const dateData: any = this.requestTimeGroup.value;
+
+      for(let i = 0; i < +duration; i++){
+        const startingTime = dateData[`starting-time-`+i];
+        const endingTime = dateData[`ending-time-`+i];
+        const date = new Date(initialDate.getTime() + 1000*60*60*24*i);
+        const datePattern = date.getFullYear() + '-' + (((date.getMonth() + 1)/10) >= 1 ? date.getMonth() + 1 : '0'+(date.getMonth()+1)) + '-' + date.getDate();
+
+        collection.push({
+          date: datePattern,
+          startingTime: startingTime,
+          endingTime: endingTime
+        })
+      }  
+    }
+
+    return collection;
   }
 
   ngOnInit(): void {

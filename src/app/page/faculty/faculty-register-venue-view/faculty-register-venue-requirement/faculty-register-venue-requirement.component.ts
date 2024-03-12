@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FacultyRequirementFormComponent } from '../../faculty-requirement-form/faculty-requirement-form.component';
 import { FacultyFormButtonComponent } from '../../faculty-form-button/faculty-form-button.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-faculty-register-venue-requirement',
@@ -11,11 +11,15 @@ import { Router } from '@angular/router';
   templateUrl: './faculty-register-venue-requirement.component.html',
   styleUrls: ['./faculty-register-venue-requirement.component.sass']
 })
-export class FacultyRegisterVenueRequirementComponent {
+export class FacultyRegisterVenueRequirementComponent implements OnInit {
   formMode = "submit"
   formValidity = false
+  eventId = ""
 
-  constructor(private _router: Router) {}
+  constructor(
+    private _router: Router,
+    private _activatedRouter: ActivatedRoute
+  ) {}
 
   submitForm = () => {
     console.log("submitting")
@@ -24,5 +28,10 @@ export class FacultyRegisterVenueRequirementComponent {
 
   updateValidity = (validity: boolean) => {
     this.formValidity = validity
+  }
+
+  ngOnInit(): void {
+    if(this._activatedRouter.snapshot.queryParamMap.get('event') !== null && this._activatedRouter.snapshot.queryParamMap.get('event') !== "")
+      this.eventId = this._activatedRouter.snapshot.queryParamMap.get('event')! as string
   }
 }

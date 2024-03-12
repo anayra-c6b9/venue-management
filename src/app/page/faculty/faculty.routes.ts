@@ -7,6 +7,11 @@ import { FacultyYourRequestsViewComponent } from "./faculty-your-requests-view/f
 
 export const FACULTY_ROUTES: Route[] = [
     {
+        path: "",
+        redirectTo: "register-venue",
+        pathMatch: "full"
+    },
+    {
         path: "register-venue",
         loadChildren: () => import("./faculty-register-venue/faculty-register-venue.routes").then(m => m.FACULTY_REGISTER_VENUE_ROUTES)
     },
@@ -21,10 +26,5 @@ export const FACULTY_ROUTES: Route[] = [
     {
         path: "check-availability",
         component: FacultyCheckAvailabilityComponent
-    },
-    {
-        path: "",
-        redirectTo: "register-venue",
-        pathMatch: "full"
     }
 ]

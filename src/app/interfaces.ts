@@ -45,18 +45,18 @@ export interface FacultyEventsCollection extends Array<FacultyEvents> {}
 // venue Events
 
 //--posting
+export interface EventTimes {
+  "date": string,
+  "startingTime": string,
+  "endingTime": string
+}
+
 export interface FacultyVenueEvent {
     "eventName": string,
     "eventStartingDate": string,
     "eventEndingDate": string,
     "eventDuration": Number,
-    "eventTimes": [
-      {
-        "date": string,
-        "startingTime": string,
-        "endingTime": string
-      }
-    ],
+    "eventTimes": Array<EventTimes>,
     "eventStatus": string,
     "eventId": string,
     "facultyId": string
@@ -85,8 +85,28 @@ export interface VenueEvent {
 
 export interface VenueEventsCollection extends Array<VenueEvent> {}
 
+// Venue Requirements
 
+// -- posting
+export interface FacultyVenueRequirement {
+  "hallId": string,
+  "hallName": string,
+  "noOfMics": Number,
+  "noOfSeats": Number,
+  "noOfStandMics": Number,
+  "noOfCollarMics": Number,
+  "noOfLeatherChair": Number,
+  "acRequirement": boolean,
+  "laptopRequirement": boolean,
+  "whiteBoardRequirement": boolean,
+  "lampRequirement": boolean,
+  "soundSystemRequirement": boolean,
+  "projectorRequirement": boolean,
+  "projectorSliderRequirement": boolean,
+  "venueEventId": string
+}
 
+export interface FacultyVenueRequirementCollection extends Array<FacultyVenueRequirement> {}
 // export interface AddVenueFormGroup extends FormGroup {
 //     hallName: FormControl<string | null>,
 //     noOfSeats: FormControl<Number | null>,
